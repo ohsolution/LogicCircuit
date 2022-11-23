@@ -1,7 +1,7 @@
 module Controller_module(clk,rst,state,MS,CS,DS);
 
 	input clk,rst;
-	input reg[1:0] MS,CS,DS;	
+	input wire[1:0] MS,CS,DS;	
 	output reg[1:0] state;
 	reg[1:0] next_state;	
 	
@@ -10,7 +10,7 @@ module Controller_module(clk,rst,state,MS,CS,DS);
 		next_state = 0;		
 	end
 		
-	parameter Sinit=0,Scal=1,Sdisplay=2,Slast=3;		
+	parameter Sinit=0,Smem=1,Scal=2,Sdisplay=3;		
 	
 	always @(posedge clk)
 	begin
@@ -29,6 +29,12 @@ module Controller_module(clk,rst,state,MS,CS,DS);
 			Sinit: begin
 				if(MS == 2'b01 && CS == 2'b01 && DS == 2'b01)
 				begin 
+					next_state = Smem;
+				end
+			end
+			Smem: begin 
+				if(MS == 2'b10)
+				begin 
 					next_state = Scal;
 				end
 			end
@@ -37,15 +43,6 @@ module Controller_module(clk,rst,state,MS,CS,DS);
 				begin 
 					next_state = Sdisplay;
 				end
-			end
-			Sdisplay : begin
-				if(DS == 2'b10)
-				begin 
-					next_state = Slast;
-				end
-			end
-			Slast : begin
-				
 			end
 		endcase
 		

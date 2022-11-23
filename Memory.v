@@ -54,27 +54,31 @@ always @(posedge clk)
 begin 
    if(rst==1'b1) begin 
 
-    MS = 2'b00; 
-    
-    VDATA[0][0] <=0; VDATA[0][1] <=0; VDATA[0][2] <=0; VDATA[0][3] <=0;
-    VDATA[1][0] <=0; VDATA[1][1] <=0; VDATA[1][2] <=0; VDATA[1][3] <=0;
-    VDATA[2][0] <=0; VDATA[2][1] <=0; VDATA[2][2] <=0; VDATA[2][3] <=0;
-    VDATA[3][0] <=0; VDATA[3][1] <=0; VDATA[3][2] <=0; VDATA[3][3] <=0;
-        
-    VFILTER[0][0] <=0; VFILTER[0][1] <=0; VFILTER[0][2] <=0;
-    VFILTER[1][0] <=0; VFILTER[1][1] <=0; VFILTER[1][2] <=0;
-    VFILTER[2][0] <=0; VFILTER[2][1] <=0; VFILTER[2][2] <=0;
-    
-    Vret22[0][0] <= 0; Vret22[0][1] <= 0; 
-    Vret22[1][0] <= 0; Vret22[1][1] <= 0;
-    
-    Vret33[0][0] <= 0; Vret33[0][1] <= 0;
-    Vret33[1][0] <= 0; Vret33[1][1] <= 0;    
+    MS <= 2'b00; 
+      
     end
 end 
 
 always @(*) begin         
-    if(state == 2'b01) begin // init 
+    if(state == 2'b00) begin 
+        VDATA[0][0] =0; VDATA[0][1] =0; VDATA[0][2] =0; VDATA[0][3] =0;
+        VDATA[1][0] =0; VDATA[1][1] =0; VDATA[1][2] =0; VDATA[1][3] =0;
+        VDATA[2][0] =0; VDATA[2][1] =0; VDATA[2][2] =0; VDATA[2][3] =0;
+        VDATA[3][0] =0; VDATA[3][1] =0; VDATA[3][2] =0; VDATA[3][3] =0;
+            
+        VFILTER[0][0] =0; VFILTER[0][1] =0; VFILTER[0][2] =0;
+        VFILTER[1][0] =0; VFILTER[1][1] =0; VFILTER[1][2] =0;
+        VFILTER[2][0] =0; VFILTER[2][1] =0; VFILTER[2][2] =0;
+        
+        Vret22[0][0] = 0; Vret22[0][1] = 0; 
+        Vret22[1][0] = 0; Vret22[1][1] = 0;
+        
+        Vret33[0][0] = 0; Vret33[0][1] = 0;
+        Vret33[1][0] = 0; Vret33[1][1] = 0;
+        
+        MS = 2'b01;  
+    end
+    if(state == 2'b01) begin // mem init
             
         VDATA[0][0] = 41; VDATA[0][1] = 35; VDATA[0][2] = 190; VDATA[0][3] = 132; 
         VDATA[1][0] = 225; VDATA[1][1] = 108; VDATA[1][2] = 214; VDATA[1][3] = 174; 
