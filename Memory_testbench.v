@@ -1,3 +1,5 @@
+`timescale 1ns/1ns
+
 module Memory_testbench;
 
 reg clk,rst; // clock
@@ -37,7 +39,7 @@ begin
     state = 2'b10;
     
     #40
-    $display("ret22 : %d   ",ret22); $display("ret33 : %d   ",ret33);
+    
     CS = 2'b01;
 end 
 

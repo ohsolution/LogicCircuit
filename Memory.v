@@ -1,8 +1,8 @@
 module Memory_module(clk,rst,state,inret22,inret33,MS,CS,DATA,FILTER,ret22,ret33);
 
 input clk,rst;
-input [2:0] state,CS;
-output reg [2:0] MS;
+input [1:0] state,CS;
+output reg [1:0] MS;
 
 output wire [127:0] DATA;
 reg [7:0] VDATA[0:4] [0:4];
@@ -42,18 +42,15 @@ assign Vinret33[1][0] = inret33[23:16]; assign Vinret33[1][1] = inret33[31:24];
 integer i,j;
 
 
-input [71:0] FILTER;
-wire [7:0] VFILTER[0:3] [0:3];
-assign VFILTER[0][0] = FILTER[7:0]; assign VFILTER[0][1] = FILTER[15:8]; assign VFILTER[0][2] = FILTER[23:16]; 
-assign VFILTER[1][0] = FILTER[31:24]; assign VFILTER[1][1] = FILTER[39:32]; assign VFILTER[1][2] = FILTER[47:40]; 
-assign VFILTER[2][0] = FILTER[55:48]; assign VFILTER[2][1] = FILTER[63:56]; assign VFILTER[2][2] = FILTER[71:64]; 
-
-
+initial begin 
+   MS = 2'b00; 
+   
+end
 
 always @(posedge clk)
 begin 
    if(rst==1'b1) begin 
-
+    
     MS <= 2'b00; 
       
     end
@@ -80,17 +77,17 @@ always @(*) begin
     end
     if(state == 2'b01) begin // mem init
             
-        VDATA[0][0] = 41; VDATA[0][1] = 35; VDATA[0][2] = 190; VDATA[0][3] = 132; 
-        VDATA[1][0] = 225; VDATA[1][1] = 108; VDATA[1][2] = 214; VDATA[1][3] = 174; 
-        VDATA[2][0] = 82; VDATA[2][1] = 144; VDATA[2][2] = 73; VDATA[2][3] = 241; 
-        VDATA[3][0] = 241; VDATA[3][1] = 187; VDATA[3][2] = 233; VDATA[3][3] = 235; 
+     		
+VDATA[0][0] = 41; VDATA[0][1] = 35; VDATA[0][2] = 190; VDATA[0][3] = 132;
+		VDATA[1][0] = 225; VDATA[1][1] = 108; VDATA[1][2] = 214; VDATA[1][3] = 174;
+		VDATA[2][0] = 82; VDATA[2][1] = 144; VDATA[2][2] = 73; VDATA[2][3] = 241;
+		VDATA[3][0] = 241; VDATA[3][1] = 187; VDATA[3][2] = 233; VDATA[3][3] = 235;
 
-        
-        VFILTER[0][0] = 41; VFILTER[0][1] = 35; VFILTER[0][2] = 190; 
-        VFILTER[1][0] = 132; VFILTER[1][1] = 225; VFILTER[1][2] = 108; 
-        VFILTER[2][0] = 214; VFILTER[2][1] = 174; VFILTER[2][2] = 82; 
+		VFILTER[0][0] = 179; VFILTER[0][1] = 166; VFILTER[0][2] = 219;
+		VFILTER[1][0] = 60; VFILTER[1][1] = 135; VFILTER[1][2] = 12;
+		VFILTER[2][0] = 62; VFILTER[2][1] = 153; VFILTER[2][2] = 36;
     
-        MS = 2'b01;            
+        MS = 2'b10;            
     end     
     else if(state == 2'b10) begin // cal
         if(CS == 2'b01) begin             
@@ -99,7 +96,7 @@ always @(*) begin
             
             Vret33[0][0] = Vinret33[0][0]; Vret33[0][1] = Vinret33[0][1];
             Vret33[1][0] = Vinret33[1][0]; Vret33[1][1] = Vinret33[1][1];            
-           MS = 2'b10;             
+           MS = 2'b11;             
         end                
     end           
 end

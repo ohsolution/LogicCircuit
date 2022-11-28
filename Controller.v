@@ -9,17 +9,17 @@ module Controller_module(clk,rst,state,MS,CS,DS);
 		state = 0;
 		next_state = 0;		
 	end
-		
+				
 	parameter Sinit=0,Smem=1,Scal=2,Sdisplay=3;		
 	
 	always @(posedge clk)
 	begin
 		if(rst == 1'b1) 
 		begin  
-			state = Sinit;
-			next_state = Sinit;
+			state <= Sinit;
+			next_state <= Sinit;
 		end
-		else state = next_state;
+		else state <= next_state;
 	end
 	
 	always@(*) begin
@@ -39,14 +39,14 @@ module Controller_module(clk,rst,state,MS,CS,DS);
 				end
 			end
 			Scal: begin 
-				if(CS == 2'b10 && MS == 2'b10)
+				if(CS == 2'b10 && MS == 2'b11)
 				begin 
 					next_state = Sdisplay;
 				end
 			end
-		endcase
-		
+		endcase		
 	end
+	
 endmodule
 
  
