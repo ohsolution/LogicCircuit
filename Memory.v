@@ -78,14 +78,15 @@ always @(*) begin
     if(state == 2'b01) begin // mem init
             
      		
-VDATA[0][0] = 41; VDATA[0][1] = 35; VDATA[0][2] = 190; VDATA[0][3] = 132;
-		VDATA[1][0] = 225; VDATA[1][1] = 108; VDATA[1][2] = 214; VDATA[1][3] = 174;
-		VDATA[2][0] = 82; VDATA[2][1] = 144; VDATA[2][2] = 73; VDATA[2][3] = 241;
-		VDATA[3][0] = 241; VDATA[3][1] = 187; VDATA[3][2] = 233; VDATA[3][3] = 235;
+        VDATA[0][0] = 1; VDATA[0][1] = 1; VDATA[0][2] = 7; VDATA[0][3] = 2;
+        
+		VDATA[1][0] = 8; VDATA[1][1] = 6; VDATA[1][2] = 8; VDATA[1][3] = 10;
+		VDATA[2][0] = 3; VDATA[2][1] = 2; VDATA[2][2] = 4; VDATA[2][3] = 1;
+		VDATA[3][0] = 5; VDATA[3][1] =7; VDATA[3][2] = 0; VDATA[3][3] = 9;
 
-		VFILTER[0][0] = 179; VFILTER[0][1] = 166; VFILTER[0][2] = 219;
-		VFILTER[1][0] = 60; VFILTER[1][1] = 135; VFILTER[1][2] = 12;
-		VFILTER[2][0] = 62; VFILTER[2][1] = 153; VFILTER[2][2] = 36;
+		VFILTER[0][0] = 3; VFILTER[0][1] = 2; VFILTER[0][2] = 0;
+		VFILTER[1][0] = 5; VFILTER[1][1] = 0; VFILTER[1][2] = 4;
+		VFILTER[2][0] = 0; VFILTER[2][1] = 5; VFILTER[2][2] = 4;
     
         MS = 2'b10;            
     end     
